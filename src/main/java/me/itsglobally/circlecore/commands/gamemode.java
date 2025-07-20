@@ -8,10 +8,14 @@ import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.Nullable;
 
-public class gamemode implements CommandExecutor {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class gamemode implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
@@ -22,19 +26,19 @@ public class gamemode implements CommandExecutor {
         switch (s) {
             case "gmc" -> {
                 p.setGameMode(GameMode.CREATIVE);
-                a.sendActionBar(Component.text("u changed ur shitty gm to " + GameMode.CREATIVE.toString()));
+                a.sendActionBar(Component.text("u changed ur shitty gm to " + GameMode.CREATIVE));
             }
             case "gms" ->{
                 p.setGameMode(GameMode.SURVIVAL);
-                a.sendActionBar(Component.text("u changed ur shitty gm to " + GameMode.SURVIVAL.toString()));
+                a.sendActionBar(Component.text("u changed ur shitty gm to " + GameMode.SURVIVAL));
             }
             case "gma" ->{
                 p.setGameMode(GameMode.ADVENTURE);
-                a.sendActionBar(Component.text("u changed ur shitty gm to " + GameMode.ADVENTURE.toString()));
+                a.sendActionBar(Component.text("u changed ur shitty gm to " + GameMode.ADVENTURE));
             }
             case "gmsp" -> {
                 p.setGameMode(GameMode.SPECTATOR);
-                a.sendActionBar(Component.text("u changed ur shitty gm to " + GameMode.SPECTATOR.toString()));
+                a.sendActionBar(Component.text("u changed ur shitty gm to " + GameMode.SPECTATOR));
             }
             case "gm" -> {
                 String mode = strings[0];
@@ -50,10 +54,10 @@ public class gamemode implements CommandExecutor {
                 }
                 Player player = Bukkit.getPlayerExact(strings[1]);
                 if (player == null) {
-                    p.setGameMode(gm);// wait
+                    p.setGameMode(gm);
                     Audience audience = utils.getInstance().adventure().player(player);
-                    audience.sendActionBar(Component.text("§7a retard has changed ur fucking gm to " + gm.toString()));
-                    a.sendActionBar(Component.text("§7u changed a retard's gm to " + gm.toString()));
+                    audience.sendActionBar(Component.text("§7a retard has changed ur fucking gm to " + gm));
+                    a.sendActionBar(Component.text("§7u changed a retard's gm to " + gm));
                     return true;
                 }
                 player.setGameMode(gm);
@@ -61,5 +65,24 @@ public class gamemode implements CommandExecutor {
             }
         }
         return true;
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
+        if (!(commandSender instanceof Player p)) {
+            return Collections.singletonList("u_fucking_retarded");
+        }
+        if (s.equalsIgnoreCase("gm")) {
+            if (strings.length == 1) {
+                List.of("1", "2", "3", "4");
+            } else if (strings.length == 2) {
+                List<String> ol = new ArrayList<>();
+                for (Player pe : Bukkit.getOnlinePlayers()) {
+                    ol.add(pe.getName());
+                }
+                return ol;
+            }
+        }
+        return Collections.singletonList("bro_is_retarded_omfg");
     }
 }
