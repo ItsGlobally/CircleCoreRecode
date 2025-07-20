@@ -1,0 +1,12 @@
+name: CircleCore
+version: '${project.version}'
+main: me.itsglobally.circlecore.CircleCore
+load: STARTUP
+commands:
+  gamemode:
+    aliases:
+      - gm
+      - gmc
+      - gms
+      - gma
+      - gmsp
