@@ -5,6 +5,7 @@ import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -27,18 +28,23 @@ public class gamemode implements CommandExecutor, TabCompleter {
             case "gmc" -> {
                 p.setGameMode(GameMode.CREATIVE);
                 a.sendActionBar(Component.text("u changed ur shitty gm to " + GameMode.CREATIVE));
+                p.playSound(p.getLocation(), Sound.CLICK, 1.0f, 1.0f);
             }
             case "gms" ->{
                 p.setGameMode(GameMode.SURVIVAL);
                 a.sendActionBar(Component.text("u changed ur shitty gm to " + GameMode.SURVIVAL));
+                p.playSound(p.getLocation(), Sound.CLICK, 1.0f, 1.0f);
             }
             case "gma" ->{
                 p.setGameMode(GameMode.ADVENTURE);
                 a.sendActionBar(Component.text("u changed ur shitty gm to " + GameMode.ADVENTURE));
+                p.playSound(p.getLocation(), Sound.CLICK, 1.0f, 1.0f);
             }
             case "gmsp" -> {
                 p.setGameMode(GameMode.SPECTATOR);
                 a.sendActionBar(Component.text("u changed ur shitty gm to " + GameMode.SPECTATOR));
+                p.playSound(p.getLocation(), Sound.CLICK, 1.0f, 1.0f);
+
             }
             case "gm" -> {
                 String mode = strings[0];
@@ -60,6 +66,8 @@ public class gamemode implements CommandExecutor, TabCompleter {
                     a.sendActionBar(Component.text("§7u changed a retard's gm to " + gm));
                     return true;
                 }
+                p.playSound(p.getLocation(), Sound.CLICK, 1.0f, 1.0f);
+
                 player.setGameMode(gm);
 
             }
