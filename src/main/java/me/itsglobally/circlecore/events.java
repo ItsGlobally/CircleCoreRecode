@@ -22,10 +22,10 @@ public class events implements Listener {
 
         LuckPerms lp = LuckPermsProvider.get();
         User user = lp.getUserManager().getUser(player.getUniqueId());
-        String prefix = user != null ? user.getCachedData().getMetaData().getPrefix() : null;
+        String prefix = user != null ? user.getCachedData().getMetaData().getPrefix() + " " : null;
         if (prefix == null) prefix = "§7";
         utils.setPrefix(e.getPlayer().getUniqueId(), prefix);
-        String formattedName = prefix + " " + player.getName();
+        String formattedName = prefix  + player.getName();
 
         player.setPlayerListName(formattedName);
         player.setDisplayName(formattedName);
