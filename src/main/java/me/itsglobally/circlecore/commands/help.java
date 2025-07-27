@@ -9,10 +9,10 @@ public class help implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         commandSender.sendMessage(
                 "§d-----------------------------------------------------\n" +
-                        "§bWelcome to §dCircle Network!" +
-                        "§aIf you are looking for help, please join our Discord server!" +
-                        "§bServer link: §rhttps://discord.gg/uU7QndhFws" +
-                        "§d-----------------------------------------------------\n"
+                        "§bWelcome to §dCircle Network!\n" +
+                        "§aIf you are looking for help, please join our Discord server!\n" +
+                        "§bServer link: §rhttps://discord.gg/uU7QndhFws\n" +
+                        "§d-----------------------------------------------------"
         );
         return true;
     }
