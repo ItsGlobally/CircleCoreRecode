@@ -10,3 +10,5 @@ commands:
       - gms
       - gma
       - gmsp
+  help:
+    description: "?"

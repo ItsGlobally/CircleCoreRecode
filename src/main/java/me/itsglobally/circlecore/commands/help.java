@@ -8,8 +8,11 @@ public class help implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         commandSender.sendMessage(
-                "-----------------------------------------------------\n" +
-                   ""
+                "§d-----------------------------------------------------\n" +
+                        "§bWelcome to §dCircle Network!" +
+                        "§aIf you are looking for help, please join our Discord server!" +
+                        "§bServer link: §rhttps://discord.gg/uU7QndhFws" +
+                        "§d-----------------------------------------------------\n"
         );
         return true;
     }

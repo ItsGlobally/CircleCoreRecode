@@ -14,6 +14,7 @@ public final class CircleCore extends JavaPlugin {
         this.adventure = BukkitAudiences.create(this);
         getCommand("gamemode").setTabCompleter(new gamemode());
         getCommand("gamemode").setExecutor(new gamemode());
+        getCommand("help").setExecutor(new help());
         getServer().getPluginManager().registerEvents(new events(), this);
     }
 
