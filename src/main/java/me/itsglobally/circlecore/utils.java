@@ -1,5 +1,6 @@
 package me.itsglobally.circlecore;
 
+import net.kyori.adventure.audience.Audience;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -36,5 +37,8 @@ public class utils {
     }
     public static void chat(Player p, String s) {
         p.chat(ChatColor.translateAlternateColorCodes('&', s));
+    }
+    public static Audience getAudience(Player p) {
+        return getInstance().adventure().player(p);
     }
 }

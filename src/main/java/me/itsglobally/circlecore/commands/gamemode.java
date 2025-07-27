@@ -23,30 +23,34 @@ public class gamemode implements CommandExecutor, TabCompleter {
         if (!(commandSender instanceof Player p)) {
             return true;
         }
-        Audience a = utils.getInstance().adventure().player(p);
+        Audience a = utils.getAudience(p);
         switch (s) {
             case "gmc" -> {
                 p.setGameMode(GameMode.CREATIVE);
-                a.sendActionBar(Component.text("u changed ur shitty gm to " + GameMode.CREATIVE));
+                a.sendActionBar(Component.text("§7You've changed your gamemode to " + GameMode.CREATIVE));
                 p.playSound(p.getLocation(), Sound.CLICK, 1.0f, 1.0f);
             }
             case "gms" ->{
                 p.setGameMode(GameMode.SURVIVAL);
-                a.sendActionBar(Component.text("u changed ur shitty gm to " + GameMode.SURVIVAL));
+                a.sendActionBar(Component.text("§7You've changed your gamemode to " + GameMode.SURVIVAL));
                 p.playSound(p.getLocation(), Sound.CLICK, 1.0f, 1.0f);
             }
             case "gma" ->{
                 p.setGameMode(GameMode.ADVENTURE);
-                a.sendActionBar(Component.text("u changed ur shitty gm to " + GameMode.ADVENTURE));
+                a.sendActionBar(Component.text("§7You've changed your gamemode to " + GameMode.ADVENTURE));
                 p.playSound(p.getLocation(), Sound.CLICK, 1.0f, 1.0f);
             }
             case "gmsp" -> {
                 p.setGameMode(GameMode.SPECTATOR);
-                a.sendActionBar(Component.text("u changed ur shitty gm to " + GameMode.SPECTATOR));
+                a.sendActionBar(Component.text("§7You've changed your gamemode to " + GameMode.SPECTATOR));
                 p.playSound(p.getLocation(), Sound.CLICK, 1.0f, 1.0f);
 
             }
             case "gm" -> {
+                if (strings.length < 1) {
+                    p.sendMessage("§c/gamemode (0|1|2|3) (Player)");
+                    return true;
+                }
                 String mode = strings[0];
                 GameMode gm= null;
                 switch (mode) {
@@ -56,16 +60,18 @@ public class gamemode implements CommandExecutor, TabCompleter {
                     case "3" -> gm = GameMode.SPECTATOR;
                 }
                 if (gm == null) {
+                    p.sendMessage("§c/gamemode (0|1|2|3) (Player)");
                     return true;
                 }
                 Player player = Bukkit.getPlayerExact(strings[1]);
                 if (player == null) {
-                    p.setGameMode(gm);
-                    Audience audience = utils.getInstance().adventure().player(player);
-                    audience.sendActionBar(Component.text("§7a retard has changed ur fucking gm to " + gm));
-                    a.sendActionBar(Component.text("§7u changed a retard's gm to " + gm));
+                    p.sendMessage("§cThat player is not online!");
                     return true;
                 }
+                p.setGameMode(gm);
+                Audience audience = utils.getAudience(player);
+                audience.sendActionBar(Component.text(p.getDisplayName() + "§7 has changed your gamemode to " + gm));
+                a.sendActionBar(Component.text("§7You have changed " + player.getDisplayName() + "§7's gamemode to " + gm));
                 p.playSound(p.getLocation(), Sound.CLICK, 1.0f, 1.0f);
 
                 player.setGameMode(gm);
@@ -78,11 +84,11 @@ public class gamemode implements CommandExecutor, TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
         if (!(commandSender instanceof Player p)) {
-            return Collections.singletonList("u_fucking_retarded");
+            return Collections.singletonList("ur-not-even-player");
         }
         if (s.equalsIgnoreCase("gm")) {
             if (strings.length == 1) {
-                List.of("1", "2", "3", "4");
+                List.of("0", "1", "2", "3");
             } else if (strings.length == 2) {
                 List<String> ol = new ArrayList<>();
                 for (Player pe : Bukkit.getOnlinePlayers()) {
@@ -91,6 +97,6 @@ public class gamemode implements CommandExecutor, TabCompleter {
                 return ol;
             }
         }
-        return Collections.singletonList("bro_is_retarded_omfg");
+        return Collections.singletonList("This-command-does-not-require-arg");
     }
 }
