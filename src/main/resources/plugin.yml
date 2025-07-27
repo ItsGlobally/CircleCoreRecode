@@ -10,5 +10,9 @@ commands:
       - gms
       - gma
       - gmsp
+    permission: circlecore.gm
   help:
     description: "?"
+permissions:
+  circlecore.gm:
+    default: op
