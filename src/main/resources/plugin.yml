@@ -17,10 +17,14 @@ commands:
     permission: circlecore.vanish
   nick:
     permission: circlecore.nick
+  unnick:
+    permission: circlecore.unnick
 permissions:
   circlecore.gm:
     default: op
   circlecore.vanish:
     default: op
   circlecore.nick:
+    default: op
+  circlecore.unnick:
     default: op

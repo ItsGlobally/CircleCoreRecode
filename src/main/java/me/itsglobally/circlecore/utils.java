@@ -5,8 +5,10 @@ import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scoreboard.Team;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class utils {
@@ -47,10 +49,6 @@ public class utils {
     public static void setVanished(UUID u, Boolean s) {
         vanished.put(u, s);
     }
-    public static void toggleVanished(UUID u) {
-        vanished.put(u, !vanished.getOrDefault(u, false));
-    }
-
     public static Boolean getVanished(UUID u) {
         return vanished.getOrDefault(u, false);
     }
@@ -62,4 +60,6 @@ public class utils {
     public static String getNick(UUID u) {
         return nick.get(u);
     }
+
+
 }
