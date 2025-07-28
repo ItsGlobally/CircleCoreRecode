@@ -13,6 +13,14 @@ commands:
     permission: circlecore.gm
   help:
     description: "?"
+  vanish:
+    permission: circlecore.vanish
+  nick:
+    permission: circlecore.nick
 permissions:
   circlecore.gm:
+    default: op
+  circlecore.vanish:
+    default: op
+  circlecore.nick:
     default: op

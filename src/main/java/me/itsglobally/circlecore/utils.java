@@ -2,6 +2,7 @@ package me.itsglobally.circlecore;
 
 import net.kyori.adventure.audience.Audience;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -40,5 +41,25 @@ public class utils {
     }
     public static Audience getAudience(Player p) {
         return getInstance().adventure().player(p);
+    }
+
+    private static final HashMap<UUID, Boolean> vanished = new HashMap<>();
+    public static void setVanished(UUID u, Boolean s) {
+        vanished.put(u, s);
+    }
+    public static void toggleVanished(UUID u) {
+        vanished.put(u, !vanished.getOrDefault(u, false));
+    }
+
+    public static Boolean getVanished(UUID u) {
+        return vanished.getOrDefault(u, false);
+    }
+    private static final HashMap<UUID, String> nick = new HashMap<>();
+    public static void setNick(UUID u, String s) {
+        nick.put(u, s);
+    }
+
+    public static String getNick(UUID u) {
+        return nick.get(u);
     }
 }

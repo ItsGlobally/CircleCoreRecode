@@ -15,6 +15,7 @@ public final class CircleCore extends JavaPlugin {
         getCommand("gamemode").setTabCompleter(new gamemode());
         getCommand("gamemode").setExecutor(new gamemode());
         getCommand("help").setExecutor(new help());
+        getCommand("vanish").setExecutor(new vanish());
         getServer().getPluginManager().registerEvents(new events(), this);
     }
 
