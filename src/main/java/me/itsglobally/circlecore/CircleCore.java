@@ -1,11 +1,15 @@
 package me.itsglobally.circlecore;
 
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.ProtocolManager;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bukkit.plugin.java.JavaPlugin;
 import me.itsglobally.circlecore.commands.*;
 public final class CircleCore extends JavaPlugin {
 
     private BukkitAudiences adventure;
+
+    private ProtocolManager protocolManager;
 
     @Override
     public void onEnable() {
@@ -16,9 +20,8 @@ public final class CircleCore extends JavaPlugin {
         getCommand("gamemode").setExecutor(new gamemode());
         getCommand("help").setExecutor(new help());
         getCommand("vanish").setExecutor(new vanish());
-        getCommand("nick").setExecutor(new nick());
-        getCommand("unnick").setExecutor(new unnick());
         getServer().getPluginManager().registerEvents(new events(), this);
+        protocolManager = ProtocolLibrary.getProtocolManager();
     }
 
     @Override
@@ -28,4 +31,6 @@ public final class CircleCore extends JavaPlugin {
     public BukkitAudiences adventure() {
         return this.adventure;
     }
+
+    public ProtocolManager protocolMgr() { return this.protocolManager; }
 }

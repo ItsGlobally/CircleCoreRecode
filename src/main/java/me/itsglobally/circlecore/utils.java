@@ -1,15 +1,23 @@
 package me.itsglobally.circlecore;
 
+import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.ProtocolManager;
+import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.wrappers.*;
 import net.kyori.adventure.audience.Audience;
+import net.luckperms.api.LuckPerms;
+import net.luckperms.api.LuckPermsProvider;
+import net.luckperms.api.model.user.User;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.lang.reflect.InvocationTargetException;
+import java.util.*;
 
 public class utils {
     private static JavaPlugin plugin;
@@ -52,14 +60,21 @@ public class utils {
     public static Boolean getVanished(UUID u) {
         return vanished.getOrDefault(u, false);
     }
-    private static final HashMap<UUID, String> nick = new HashMap<>();
-    public static void setNick(UUID u, String s) {
-        nick.put(u, s);
+
+    public static void appplynametag(String prefix, Player player) {
+
+        Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
+        String safeTeamName = player.getName().length() > 16 ? player.getName().substring(0, 16) : player.getName();
+
+        Team team = scoreboard.getTeam(safeTeamName);
+        if (team != null) team.unregister();
+        team = scoreboard.registerNewTeam(safeTeamName);
+
+        team.setPrefix(prefix);
+        team.addEntry(player.getName());
+
     }
 
-    public static String getNick(UUID u) {
-        return nick.get(u);
-    }
 
 
 }
