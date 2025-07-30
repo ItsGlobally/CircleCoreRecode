@@ -22,6 +22,7 @@ public final class CircleCore extends JavaPlugin {
         getCommand("vanish").setExecutor(new vanish());
         getServer().getPluginManager().registerEvents(new events(), this);
         protocolManager = ProtocolLibrary.getProtocolManager();
+
     }
 
     @Override

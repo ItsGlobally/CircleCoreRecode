@@ -44,6 +44,6 @@ public class events implements Listener {
     @EventHandler
     public void onChat(PlayerChatEvent e) {
         e.setCancelled(true);
-        Bukkit.broadcastMessage(/*utils.getPrefix(e.getPlayer().getUniqueId()) + */e.getPlayer().getDisplayName() + " §r» " + e.getMessage());
+        if (api.getChatFormatHandleByCore()) Bukkit.broadcastMessage(e.getPlayer().getDisplayName() + "§r» " + e.getMessage());
     }
 }
