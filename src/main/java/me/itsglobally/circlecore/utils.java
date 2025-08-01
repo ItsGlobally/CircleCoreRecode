@@ -61,19 +61,6 @@ public class utils {
         return vanished.getOrDefault(u, false);
     }
 
-    public static void appplynametag(String prefix, Player player) {
-
-        Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
-        String safeTeamName = player.getName().length() > 16 ? player.getName().substring(0, 16) : player.getName();
-
-        Team team = scoreboard.getTeam(safeTeamName);
-        if (team != null) team.unregister();
-        team = scoreboard.registerNewTeam(safeTeamName);
-
-        team.setPrefix(prefix);
-        team.addEntry(player.getName());
-
-    }
 
 
 

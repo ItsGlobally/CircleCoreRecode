@@ -33,7 +33,6 @@ public class events implements Listener {
 
                 player.setPlayerListName(formattedName);
                 player.setDisplayName(formattedName);
-                utils.appplynametag(prefix, player);
             }
         }.runTaskLater(utils.getPlugin(), 10L);
 

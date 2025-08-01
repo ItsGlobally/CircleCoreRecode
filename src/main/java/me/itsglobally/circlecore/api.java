@@ -1,5 +1,7 @@
 package me.itsglobally.circlecore;
 
+import java.util.Objects;
+
 public class api {
     private static Boolean chatFormatHandleByCore;
     public static void setChatFormat(Boolean s) {
@@ -7,6 +9,6 @@ public class api {
     }
 
     public static Boolean getChatFormatHandleByCore() {
-        return chatFormatHandleByCore;
+        return Objects.requireNonNullElse(chatFormatHandleByCore, false);
     }
 }
