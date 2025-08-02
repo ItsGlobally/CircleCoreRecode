@@ -20,7 +20,6 @@ public final class CircleCore extends JavaPlugin {
         getCommand("gamemode").setExecutor(new gamemode());
         getCommand("help").setExecutor(new help());
         getCommand("vanish").setExecutor(new vanish());
-        getCommand("nick").setExecutor(new nick());
         getServer().getPluginManager().registerEvents(new events(), this);
         protocolManager = ProtocolLibrary.getProtocolManager();
 

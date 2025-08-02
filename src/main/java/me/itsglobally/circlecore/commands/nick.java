@@ -1,6 +1,7 @@
 package me.itsglobally.circlecore.commands;
 
 import me.itsglobally.circlecore.utils;
+import me.neznamy.tab.api.nametag.NameTagManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -23,6 +24,7 @@ public class nick implements CommandExecutor {
                 p.setDisplayName(fname);
                 p.setPlayerListName(fname);
                 utils.setNick(p.getUniqueId(), name);
+                p.setCustomName(p.getDisplayName());
                 p.sendMessage("§aNicked as " + fname);
             }
             case "unnick" -> {
@@ -30,6 +32,7 @@ public class nick implements CommandExecutor {
                 p.setDisplayName(fname);
                 p.setPlayerListName(fname);
                 utils.setNick(p.getUniqueId(), p.getName());
+                p.setCustomName(p.getDisplayName());
                 p.sendMessage("§aUnnicked");
             }
         }
