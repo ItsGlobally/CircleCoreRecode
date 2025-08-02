@@ -60,7 +60,20 @@ public class utils {
     public static Boolean getVanished(UUID u) {
         return vanished.getOrDefault(u, false);
     }
+    public static String vanishSuffix(UUID u) {
+        if (getVanished(u)) return " §d[V]";
+        else return "";
+    }
 
+    private static final HashMap<UUID, String> nick = new HashMap<>();
+
+    public static void setNick(UUID p, String n) {
+        nick.put(p, n);
+    }
+
+    public static String getNick(UUID p) {
+        return nick.getOrDefault(p, Bukkit.getPlayer(p).getName());
+    }
 
 
 

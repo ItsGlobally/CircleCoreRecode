@@ -28,3 +28,5 @@ permissions:
     default: op
   circlecore.unnick:
     default: op
+  circlecore.canSeeVanish:
+    default: op

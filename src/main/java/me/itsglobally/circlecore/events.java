@@ -11,13 +11,18 @@ import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.Objects;
+
 public class events implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
         for (Player ifvanished : Bukkit.getOnlinePlayers()) {
             if (utils.getVanished(ifvanished.getUniqueId())) {
-                player.hidePlayer(ifvanished);
+                for (Player op : Bukkit.getOnlinePlayers()) {
+                    if (op.hasPermission("circlecore.canSeeVanish")) continue;
+                    op.hidePlayer(ifvanished);
+                }
             }
         }
 
@@ -35,10 +40,11 @@ public class events implements Listener {
                 player.setDisplayName(formattedName);
             }
         }.runTaskLater(utils.getPlugin(), 10L);
-
-
-
-
+        if (!Objects.equals(utils.getNick(player.getUniqueId()), player.getName())) {
+            String fname = utils.getPrefix(player.getUniqueId()) + utils.getNick(player.getUniqueId());
+            player.setDisplayName(fname);
+            player.setPlayerListName(fname);
+        }
     }
     @EventHandler
     public void onChat(PlayerChatEvent e) {
