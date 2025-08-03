@@ -1,7 +1,6 @@
 package me.itsglobally.circlecore.commands;
 
 import me.itsglobally.circlecore.utils;
-import me.neznamy.tab.api.nametag.NameTagManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

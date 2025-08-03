@@ -2,9 +2,12 @@ package me.itsglobally.circlecore;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
+import me.itsglobally.circlecore.commands.gamemode;
+import me.itsglobally.circlecore.commands.help;
+import me.itsglobally.circlecore.commands.vanish;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bukkit.plugin.java.JavaPlugin;
-import me.itsglobally.circlecore.commands.*;
+
 public final class CircleCore extends JavaPlugin {
 
     private BukkitAudiences adventure;
@@ -29,9 +32,12 @@ public final class CircleCore extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
     }
+
     public BukkitAudiences adventure() {
         return this.adventure;
     }
 
-    public ProtocolManager protocolMgr() { return this.protocolManager; }
+    public ProtocolManager protocolMgr() {
+        return this.protocolManager;
+    }
 }

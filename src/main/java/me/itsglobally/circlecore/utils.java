@@ -1,23 +1,13 @@
 package me.itsglobally.circlecore;
 
-import com.comphenix.protocol.PacketType;
-import com.comphenix.protocol.ProtocolLibrary;
-import com.comphenix.protocol.ProtocolManager;
-import com.comphenix.protocol.events.PacketContainer;
-import com.comphenix.protocol.wrappers.*;
 import net.kyori.adventure.audience.Audience;
-import net.luckperms.api.LuckPerms;
-import net.luckperms.api.LuckPermsProvider;
-import net.luckperms.api.model.user.User;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.Team;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.UUID;
 
 public class utils {
     private static JavaPlugin plugin;
@@ -29,6 +19,7 @@ public class utils {
     public static void setPlugin(JavaPlugin plugine) {
         plugin = plugine;
     }
+
     private static CircleCore instance;
 
     public static CircleCore getInstance() {
@@ -40,26 +31,33 @@ public class utils {
     }
 
     private static final HashMap<UUID, String> prefixes = new HashMap<>();
+
     public static void setPrefix(UUID u, String p) {
         prefixes.put(u, p);
     }
+
     public static String getPrefix(UUID u) {
         return prefixes.get(u);
     }
+
     public static void chat(Player p, String s) {
         p.chat(ChatColor.translateAlternateColorCodes('&', s));
     }
+
     public static Audience getAudience(Player p) {
         return getInstance().adventure().player(p);
     }
 
     private static final HashMap<UUID, Boolean> vanished = new HashMap<>();
+
     public static void setVanished(UUID u, Boolean s) {
         vanished.put(u, s);
     }
+
     public static Boolean getVanished(UUID u) {
         return vanished.getOrDefault(u, false);
     }
+
     public static String vanishSuffix(UUID u) {
         if (getVanished(u)) return " §d[V]";
         else return "";
@@ -74,7 +72,6 @@ public class utils {
     public static String getNick(UUID p) {
         return nick.getOrDefault(p, Bukkit.getPlayer(p).getName());
     }
-
 
 
 }

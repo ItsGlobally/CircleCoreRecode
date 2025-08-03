@@ -30,12 +30,12 @@ public class gamemode implements CommandExecutor, TabCompleter {
                 a.sendActionBar(Component.text("§7You've changed your gamemode to " + GameMode.CREATIVE));
                 p.playSound(p.getLocation(), Sound.CLICK, 1.0f, 1.0f);
             }
-            case "gms" ->{
+            case "gms" -> {
                 p.setGameMode(GameMode.SURVIVAL);
                 a.sendActionBar(Component.text("§7You've changed your gamemode to " + GameMode.SURVIVAL));
                 p.playSound(p.getLocation(), Sound.CLICK, 1.0f, 1.0f);
             }
-            case "gma" ->{
+            case "gma" -> {
                 p.setGameMode(GameMode.ADVENTURE);
                 a.sendActionBar(Component.text("§7You've changed your gamemode to " + GameMode.ADVENTURE));
                 p.playSound(p.getLocation(), Sound.CLICK, 1.0f, 1.0f);
@@ -52,7 +52,7 @@ public class gamemode implements CommandExecutor, TabCompleter {
                     return true;
                 }
                 String mode = strings[0];
-                GameMode gm= null;
+                GameMode gm = null;
                 switch (mode) {
                     case "0" -> gm = GameMode.SURVIVAL;
                     case "1" -> gm = GameMode.CREATIVE;

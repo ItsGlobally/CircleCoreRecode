@@ -9,46 +9,48 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.scheduler.BukkitRunnable;
-
-import java.util.Objects;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.Team;
 
 public class events implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
+
+        LuckPerms lp = LuckPermsProvider.get();
+        User user = lp.getUserManager().getUser(player.getUniqueId());
+        String prefix = user != null ? user.getCachedData().getMetaData().getPrefix() : null;
+        if (prefix == null) prefix = "§7";
+        utils.setPrefix(e.getPlayer().getUniqueId(), prefix);
+        String formattedName = prefix + player.getName();
+
+        player.setPlayerListName(formattedName);
+        player.setDisplayName(formattedName);
+
+        Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
+        String safeTeamName = player.getName().length() > 16 ? player.getName().substring(0, 16) : player.getName();
+
+        Team team = scoreboard.getTeam(safeTeamName);
+        if (team != null) team.unregister();
+        team = scoreboard.registerNewTeam(safeTeamName);
+
+        team.setPrefix(prefix);
+        team.addEntry(player.getName());
+
         for (Player ifvanished : Bukkit.getOnlinePlayers()) {
             if (utils.getVanished(ifvanished.getUniqueId())) {
-                for (Player op : Bukkit.getOnlinePlayers()) {
-                    if (op.hasPermission("circlecore.canSeeVanish")) continue;
-                    op.hidePlayer(ifvanished);
-                }
+                player.hidePlayer(ifvanished);
             }
         }
 
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                LuckPerms lp = LuckPermsProvider.get();
-                User user = lp.getUserManager().getUser(player.getUniqueId());
-                String prefix = user != null ? user.getCachedData().getMetaData().getPrefix() : null;
-                if (prefix == null) prefix = "§7";
-                utils.setPrefix(e.getPlayer().getUniqueId(), prefix);
-                String formattedName = prefix + player.getName();
-
-                player.setPlayerListName(formattedName);
-                player.setDisplayName(formattedName);
-            }
-        }.runTaskLater(utils.getPlugin(), 10L);
-        if (!Objects.equals(utils.getNick(player.getUniqueId()), player.getName())) {
-            String fname = utils.getPrefix(player.getUniqueId()) + utils.getNick(player.getUniqueId());
-            player.setDisplayName(fname);
-            player.setPlayerListName(fname);
+        if (utils.getNick(player.getUniqueId()) != null) {
+            player.setDisplayName(prefix + utils.getNick(player.getUniqueId()));
         }
     }
+
     @EventHandler
     public void onChat(PlayerChatEvent e) {
         e.setCancelled(true);
-        if (api.getChatFormatHandleByCore()) Bukkit.broadcastMessage(e.getPlayer().getDisplayName() + "§r» " + e.getMessage());
+        Bukkit.broadcastMessage(/*utils.getPrefix(e.getPlayer().getUniqueId()) + */e.getPlayer().getDisplayName() + " §r» " + e.getMessage());
     }
 }
